@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const ratingsRouter = require("../ratings/ratings.router")
 const controller = require("./notes.controller");
+const ratingsRouter = require("../ratings/ratings.router");
 const methodNotAllowed = require("../errors/methodNotAllowed");
 
-router.use("/:noteId/ratings", controller.noteExists, ratingsRouter)
+router.use("/:noteId/ratings", controller.noteExists, ratingsRouter);
 
 router
   .route("/:noteId")

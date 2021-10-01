@@ -37,6 +37,7 @@ function noteExists(req, res, next) {
   const noteId = Number(req.params.noteId);
   const foundNote = notes.find((note) => note.id === noteId);
   if (foundNote) {
+    res.locals.note = foundNote;
     return next();
   }
   next({
@@ -46,9 +47,7 @@ function noteExists(req, res, next) {
 }
 
 function read(req, res) {
-  const noteId = Number(req.params.noteId);
-  const foundNote = notes.find((note) => (note.id = noteId));
-  res.json({ data: foundNote });
+  res.json({ data: res.locals.note });
 }
 
 function update(req, res) {
@@ -65,6 +64,7 @@ function update(req, res) {
 module.exports = {
   create: [hasText, create],
   list,
+  noteExists,
   read: [noteExists, read],
   update: [noteExists, hasText, update],
   delete: destroy,
